@@ -3,6 +3,7 @@
 import React from 'react'
 import { Image } from 'react-native'
 
+import { useNavigation } from '@react-navigation/native'
 import {
   Container,
   Banner,
@@ -21,6 +22,16 @@ import giveClassesIcon from '../../assets/images/icons/give-classes.png'
 import heartIcon from '../../assets/images/icons/heart.png'
 
 const Landing: React.FC = () => {
+  const { navigate } = useNavigation()
+
+  function handleNavigateToGiveClassesPage() {
+    navigate('GiveClasses')
+  }
+
+  function handleNavigateToStudyPages() {
+    navigate('Study')
+  }
+
   return (
     <Container>
       <Banner source={landingImg} />
@@ -32,12 +43,12 @@ const Landing: React.FC = () => {
       </Title>
 
       <ButtonsContainer>
-        <ButtonPrimary>
+        <ButtonPrimary onPress={handleNavigateToStudyPages}>
           <Image source={studyIcon} />
           <ButtonText>Estudar</ButtonText>
         </ButtonPrimary>
 
-        <ButtonSecondary>
+        <ButtonSecondary onPress={handleNavigateToGiveClassesPage}>
           <Image source={giveClassesIcon} />
           <ButtonText>Dar aulas</ButtonText>
         </ButtonSecondary>
