@@ -2,9 +2,9 @@ import styled from 'styled-components/native'
 import { RectButton } from 'react-native-gesture-handler'
 
 export const Container = styled.View`
-  background-color: #fff;
+  background-color: ${props => props.theme.colors.li};
   border-width: 1px;
-  border-color: #e6e6f0;
+  border-color: ${props => props.theme.colors.borderTeacherItem};
   border-radius: 8px;
   margin-bottom: 16px;
   overflow: hidden;
@@ -20,7 +20,7 @@ export const Avatar = styled.Image`
   width: 64px;
   height: 64px;
   border-radius: 32px;
-  background-color: #eee;
+  background-color: ${props => props.theme.colors.avatarBackground};
 `
 
 export const ProfileInfo = styled.View`
@@ -29,14 +29,14 @@ export const ProfileInfo = styled.View`
 
 export const Name = styled.Text`
   font-family: 'Archivo_700Bold';
-  color: #32264d;
+  color: ${props => props.theme.colors.name};
   font-size: 12px;
   margin-top: 4px;
 `
 
 export const Subject = styled.Text`
   font-family: 'Poppins_400Regular';
-  color: #6a6180;
+  color: ${props => props.theme.colors.text};
   font-size: 12px;
   margin-top: 4px;
 `
@@ -46,10 +46,10 @@ export const Bio = styled.Text`
   font-family: 'Poppins_400Regular';
   font-size: 14px;
   line-height: 24px;
-  color: #6a6180;
+  color: ${props => props.theme.colors.text};
 `
 export const Footer = styled.View`
-  background-color: #fafafc;
+  background-color: ${props => props.theme.colors.footer};
   padding: 24px;
   align-items: center;
   margin-top: 24px;
@@ -57,7 +57,7 @@ export const Footer = styled.View`
 
 export const Price = styled.Text`
   font-family: 'Poppins_400Regular';
-  color: #6a6180;
+  color: ${props => props.theme.colors.text};
   font-size: 16px;
 `
 

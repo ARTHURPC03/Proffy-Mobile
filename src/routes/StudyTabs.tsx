@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { ThemeContext } from 'styled-components'
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { Ionicons } from '@expo/vector-icons'
@@ -15,6 +16,7 @@ interface IconProps {
 }
 
 function StudyTabs() {
+  const { title } = useContext(ThemeContext)
   return (
     <Navigator
       tabBarOptions={{
@@ -38,9 +40,9 @@ function StudyTabs() {
           fontSize: 13,
           marginLeft: 16,
         },
-        inactiveBackgroundColor: '#fafafc',
-        activeBackgroundColor: '#ebebf5',
-        inactiveTintColor: '#32264d',
+        inactiveBackgroundColor: title === 'light' ? '#fafafc' : '#101010',
+        activeBackgroundColor: title === 'light' ? '#ebebf5' : '#0d0d0d',
+        inactiveTintColor: title === 'light' ? '#32264d' : '#fafafc',
       }}
     >
       <Screen

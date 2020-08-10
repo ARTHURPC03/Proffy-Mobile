@@ -2,7 +2,7 @@ import styled from 'styled-components/native'
 
 export const Container = styled.View`
   padding: 40px;
-  background-color: #8257e5;
+  background-color: ${props => props.theme.colors.background};
 `
 
 export const TopBar = styled.View`

@@ -3,7 +3,7 @@ import { RectButton } from 'react-native-gesture-handler'
 
 export const Container = styled.View`
   flex: 1;
-  background-color: #f0f0f7;
+  background-color: ${props => props.theme.colors.backgroundPages};
 `
 
 export const ScrollViewTeacherList = styled.ScrollView`
@@ -15,13 +15,13 @@ export const SearchForm = styled.View`
 `
 
 export const Label = styled.Text`
-  color: #d4c2ff;
+  color: ${props => props.theme.colors.description};
   font-family: 'Poppins_400Regular';
 `
 
 export const Input = styled.TextInput`
   height: 54px;
-  background-color: #fff;
+  background-color: ${props => props.theme.colors.li};
   border-radius: 8px;
   justify-content: center;
   padding: 0 16px 0 16px;
