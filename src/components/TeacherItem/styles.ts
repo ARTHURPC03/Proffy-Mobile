@@ -73,7 +73,7 @@ export const ButtonsContainer = styled.View`
 `
 
 export const FavoriteButton = styled(RectButton)`
-  /* background-color: #8257e5; */
+  background-color: #8257e5;
   width: 56px;
   height: 56px;
   border-radius: 8px;

@@ -47,7 +47,7 @@ function StudyTabs() {
         name="TeacherList"
         component={TeacherList}
         options={{
-          tabBarLabel: 'Profys',
+          tabBarLabel: 'Proffys',
           tabBarIcon: ({ color, size, focused }: IconProps) => {
             return (
               <Ionicons

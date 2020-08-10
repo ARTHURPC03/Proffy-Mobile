@@ -1,11 +1,13 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable react/no-unescaped-entities */
-import React from 'react'
+import React, { useState } from 'react'
 
-import { Image } from 'react-native'
+import { Image, Linking } from 'react-native'
+import AsyncStorage from '@react-native-community/async-storage'
 import heartOutlineIcon from '../../assets/images/icons/heart-outline.png'
 import unfavoriteIcon from '../../assets/images/icons/unfavorite.png'
 import whatsappIcon from '../../assets/images/icons/whatsapp.png'
+
 
 import {
   Container,
@@ -23,43 +25,95 @@ import {
   ContactButton,
   ContactButtonText,
 } from './styles'
+import api from '../../services/api'
 
-const TeacherItem: React.FC = () => {
+export interface Teacher {
+  id: number
+  avatar: string
+  bio: string
+  cost: number
+  name: string
+  subject: string
+  whatsapp: string
+}
+
+interface TeacherItemProps {
+  teacher: Teacher
+  favorited: boolean
+}
+
+const TeacherItem: React.FC<TeacherItemProps> = ({teacher, favorited}:TeacherItemProps) => {
+const [isFavorited, setIsFavorited] = useState(favorited)
+
+  function handleLinkToWhatsApp() {
+    api.post('connections', {
+      user_id: teacher.id,
+    })
+
+  Linking.openURL(`whatsapp://send?phone=${teacher.whatsapp}`)
+ }
+
+ async function handleToggleFavorite() {
+  const favorites = await AsyncStorage.getItem('favorites')
+
+  let favoritesArray = []
+
+  if(favorites) {
+    favoritesArray = JSON.parse(favorites)
+  }
+
+
+  if(isFavorited) {
+    const favoriteIndex = favoritesArray.findIndex((teacherItem: Teacher) => {
+      return teacherItem.id === teacher.id
+    })
+
+    favoritesArray.splice(favoriteIndex, 1)
+    setIsFavorited(false)
+  } else {
+
+    favoritesArray.push(teacher)
+
+    setIsFavorited(true)
+  }
+  await AsyncStorage.setItem('favorites', JSON.stringify(favoritesArray))
+ }
+
   return (
     <Container>
       <Profile>
-        <Avatar source={{ uri: 'https://github.com/arthurpc03.png' }} />
+        <Avatar source={{ uri: teacher.avatar }} />
 
         <ProfileInfo>
-          <Name>ARTHUR PC</Name>
-          <Subject>Matemática</Subject>
+          <Name>{teacher.name}</Name>
+          <Subject>{teacher.subject}</Subject>
         </ProfileInfo>
       </Profile>
 
       <Bio>
-        I'm a Full Stack Developer Passionate about the best web and mobile
-        development technologies.
-        {'\n'}
-        {'\n'}
-        I'm a student at Bootcamp Gostack at
-        Rocketseat, where I learned in practice on the most modern technologies
-        of web and mobile development.
+        {teacher.bio}
       </Bio>
 
       <Footer>
         <Price>
           Preço/hora
           {'   '}
-          <PriceValue>R$ 20,00</PriceValue>
+          <PriceValue>
+            R$
+            {' '}
+            {teacher.cost}
+          </PriceValue>
         </Price>
 
         <ButtonsContainer>
-          <FavoriteButton style={{ backgroundColor: '#e33d3d' }}>
-            {/* <HeartFavoriteIcon source={heartOutlineIcon} /> */}
-            <Image source={unfavoriteIcon} />
+          <FavoriteButton onPress={handleToggleFavorite} style={isFavorited ? {  backgroundColor: '#e33d3d' } : {}}>
+
+            {isFavorited ? <Image source={heartOutlineIcon} /> :  <Image source={unfavoriteIcon} />}
+
+
           </FavoriteButton>
 
-          <ContactButton>
+          <ContactButton onPress={handleLinkToWhatsApp}>
             <Image source={whatsappIcon} />
             <ContactButtonText>Entrar em contato</ContactButtonText>
           </ContactButton>
