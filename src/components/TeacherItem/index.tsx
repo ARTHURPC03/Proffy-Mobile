@@ -108,7 +108,7 @@ const [isFavorited, setIsFavorited] = useState(favorited)
         <ButtonsContainer>
           <FavoriteButton onPress={handleToggleFavorite} style={isFavorited ? {  backgroundColor: '#e33d3d' } : {}}>
 
-            {isFavorited ? <Image source={heartOutlineIcon} /> :  <Image source={unfavoriteIcon} />}
+            {isFavorited ? <Image source={unfavoriteIcon} />  : <Image source={heartOutlineIcon} />  }
 
 
           </FavoriteButton>

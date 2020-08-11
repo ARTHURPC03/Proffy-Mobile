@@ -27,6 +27,7 @@ export const Input = styled.TextInput`
   padding: 0 16px 0 16px;
   margin-top: 4px;
   margin-bottom: 16px;
+  color: ${props => props.theme.colors.text};
 `
 
 export const InputGroup = styled.View`
